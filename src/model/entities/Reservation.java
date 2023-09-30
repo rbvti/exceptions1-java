@@ -50,9 +50,21 @@ public class Reservation {
 		
 	}
 	
-	public void updateDates(Date checkIn, Date checkOut) {
+	public String updateDates(Date checkIn, Date checkOut) {
+		
+		Date now = new Date(); //Pega a data de agora.
+		
+		//O checkIn ou checkOut não podem ser anteriores à data atual
+		if (checkIn.before(now) || checkOut.before(now)) {
+			return "Reservation dates for update must be future dates";
+		}		
+		//Se o checkOut não for posterior ao checkIn
+		if (!checkOut.after(checkIn)){
+			return "Check-out date must be after check-in date!";
+		}
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
+		return null; //Se retornar null significa que as datas foram atualizadas sem erros 
 	}
 	
 	@Override

@@ -43,24 +43,19 @@ public class Program {
 			
 			// REGRA DE VALIDAÇÃO: Não poderá haver atualização para datas anteriores ao check-in inicial 
 			
-			// 1) Implementação de uma solução ruim
+			// 2) Solução RUIM! Embora a implementação estaja na classe Reservation e não no programa principal.
 			
-			Date now = new Date(); //Pega a data de agora.
 			
-			//O checkIn ou checkOut não podem ser anteriores à data atual
-			if (checkIn.before(now) || checkOut.before(now)) {
-				System.out.println("Error in reservation: Reservation dates for update must be future dates");
-			}
-			//Se o checkOut não for posterior ao checkIn
-			else if (!checkOut.after(checkIn)){
-				System.out.println("Error in reservation: Check-out date must be after check-in date!");
-			}
-			else {
+			
 				//Atualiza as datas
-				reservation.updateDates(checkIn, checkOut);
+			String error =	reservation.updateDates(checkIn, checkOut);
+			if (error != null) {
 				
 				//Imprime as datas atualizadas
-				System.out.println("Reservation: " + reservation);
+				System.out.println("Error in reservation: " + error);
+			}
+			else {
+				System.out.println("Resevation: " + reservation);
 			}
 			
 			
